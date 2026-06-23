@@ -107,22 +107,20 @@ end
 -- ... The variable will be forwarded into the first argument to integrate the function.
 -- ... [MAY] Take additional constant arguments.
 -- ... Extra positional arguments will be forwarded to these in order.
--- * minimumValue (number) (optional): The minimum value to integrate from. | nm
+-- * minimumValue (number) (optional): The minimum value to integrate from.
 -- ... [MUST] Be greater than 0 if present.
 -- ... [MAY] Be omitted to default to the start of the visible spectrum in nanometres (380).
--- * maximumValue (number) (optional): The maximum wavelength to integrate to. | nm
+-- * maximumValue (number) (optional): The maximum value to integrate to.
 -- ... [MUST] Be greater than 0 if present.
 -- ... [MAY] Be omitted to default to the end of the visible spectrum in nanometres (780).
--- * gammaStep (number) (optional): The step size to use for the numerical integration. | nm
+-- * gammaStep (number) (optional): The step size to use for the numerical integration.
 -- ... [MUST] Be greater than 0 if present.
 -- ... [MAY] Be omitted to default to 1.
 -- ... [MAY] Be adjusted to control the balance between computational load and accuracy.
 -- * ... (any?) (optional): Additional constant arguments to forward to the spectrum function.
 -- ---
 -- Returns:
--- * [1] (number): The relative large cone tristimulus value for the given temperature.
--- * [2] (number): The relative medium cone tristimulus value for the given temperature.
--- * [3] (number): The relative small cone tristimulus value for the given temperature.
+-- * [1] (number): The result of the integral.
 function module.PartialIntegration(
 	integrandFunction: (number, ...any?) -> number,
 	
