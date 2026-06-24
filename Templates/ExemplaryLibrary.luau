@@ -1,6 +1,6 @@
 --[[
 
-	ExemplaryLibrary.luau
+	Path/To/ExemplaryLibrary.luau
 	Utility Library
 	Name your library whatever and use the correct file format.
 	

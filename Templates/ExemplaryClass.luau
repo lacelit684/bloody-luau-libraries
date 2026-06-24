@@ -1,6 +1,6 @@
 --[[
 
-	ExemplaryClass.luau
+	Path/To/ExemplaryClass.luau
 	Class Definition
 	Name your class whatever.
 	
