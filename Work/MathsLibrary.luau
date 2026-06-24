@@ -1,19 +1,20 @@
 --[[
 
 	MathsLibrary.luau
+	Utility Library
 	
 	Authors:
 	* Irene "lacelit684" - Lead Developer since 2026-06-23
 	
 	Created: 2026-06-23
-	Last Modified: 2026-06-23
+	Last Modified: 2026-06-24
 	
-	Version: 0.0.0
+	Version: 0.0.1
 	
 	License: MPL-2.0
 	
 	Description:
-	Module with helpers for calculating some maths.
+	Module for calculating some maths using helpers.
 	
 ]]
 
@@ -24,9 +25,9 @@
 -- This declaration can be removed to free up a small amount of the native code budget at the cost of poor performance. You ought to leave this in unless you already have a large amount of native code in your project. This is a mathematics library. You really ought to.
 --!native
 
-local module = {}
+local MathsLibrary = {}
 
-module.Citations = {}
+MathsLibrary.Citations = {}
 
 -- Fetches built-in citations.
 -- ---
@@ -37,12 +38,12 @@ module.Citations = {}
 -- ---
 -- Returns:
 -- * [1] (string | table): The citation at the given index if index is present, or a table of all citations if index is absent.
-function module.GetCitations(index: number?)
+function MathsLibrary:GetCitations(index: number?)
 
 	if index then
-		return module.Citations[index]
+		return MathsLibrary.Citations[index]
 	else
-		return module.Citations
+		return MathsLibrary.Citations
 	end
 
 end
@@ -51,8 +52,8 @@ end
 
 -- Constants
 
-module.VISIBLE_MIN = 380 -- Start of visible spectrum (380 nm) | nm
-module.VISIBLE_MAX = 780 -- End of visible spectrum (780 nm) | nm
+MathsLibrary.VISIBLE_MIN = 380 -- Start of visible spectrum (380 nm) | nm
+MathsLibrary.VISIBLE_MAX = 780 -- End of visible spectrum (780 nm) | nm
 
 
 
@@ -67,7 +68,7 @@ module.VISIBLE_MAX = 780 -- End of visible spectrum (780 nm) | nm
 -- ---
 -- Returns:
 -- * [1] (number): The result of the division, or 0 if the divisor is 0 or nil.
-function module.SafeDivide(dividend: number, divisor: number)
+function MathsLibrary.SafeDivide(dividend: number, divisor: number)
 
 	if divisor == 0 or divisor == nil then
 		return 0
@@ -86,7 +87,7 @@ end
 -- ---
 -- Returns:
 -- * [1] (number): The sum of the unpacked arguments.
-function module.Sum(...: number)
+function MathsLibrary.Sum(...: number)
 
 	local sum = 0
 
@@ -121,7 +122,7 @@ end
 -- ---
 -- Returns:
 -- * [1] (number): The result of the integral.
-function module.PartialIntegration(
+function MathsLibrary.PartialIntegration(
 	integrandFunction: (number, ...any?) -> number,
 	
 	minimumWavelength: number?,
@@ -133,8 +134,8 @@ function module.PartialIntegration(
 )
 
 	local step: number = gammaStep or 1
-	local minimum: number = minimumWavelength or module.VISIBLE_MIN
-	local maximum: number = maximumWavelength or module.VISIBLE_MAX
+	local minimum: number = minimumWavelength or MathsLibrary.VISIBLE_MIN
+	local maximum: number = maximumWavelength or MathsLibrary.VISIBLE_MAX
 
 	local integral = 0
 
@@ -158,4 +159,4 @@ end
 
 -- Termination
 
-return module
+return MathsLibrary

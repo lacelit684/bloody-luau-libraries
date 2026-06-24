@@ -1,14 +1,15 @@
 --[[
 
 	BlackbodyPhysicsLibrary.luau
+	Utility Library
 	
 	Contributors:
 	* Irene "lacelit684" - Lead Developer since 2026-06-21
 	
 	Created: 2025-06-25
-	Last Modified: 2026-06-23
+	Last Modified: 2026-06-24
 	
-	Version: 3.0.0
+	Version: 3.0.1
 	
 	License: MPL-2.0
 	
@@ -34,9 +35,9 @@
 -- This declaration can be removed to free up a small amount of the native code budget at the cost of poor performance. You ought to leave this in unless you already have a large amount of native code in your project.
 --!native
 
-local module = {}
+local BlackbodyPhysicsLibrary = {}
 
-module.Citations = {
+BlackbodyPhysicsLibrary.Citations = {
 	[1] = "Wyman, C., Sloan, P.-P. and Shirley, P. (2013). Simple Analytic Approximations to the CIE XYZ Color Matching Functions. Journal of Computer Graphics Techniques, [online] 2(2), p.5. Available at: https://jcgt.org/published/0002/02/01/paper.pdf [Accessed 26 Jun. 2025]."
 }
 
@@ -49,12 +50,12 @@ module.Citations = {
 -- ---
 -- Returns:
 -- * [1] (string | table): The citation at the given index if index is present, or a table of all citations if index is absent.
-function module.GetCitations(index: number?)
+function BlackbodyPhysicsLibrary.GetCitations(index: number?)
 
 	if index then
-		return module.Citations[index]
+		return BlackbodyPhysicsLibrary.Citations[index]
 	else
-		return module.Citations
+		return BlackbodyPhysicsLibrary.Citations
 	end
 
 end
@@ -69,8 +70,8 @@ local MathsLibrary = require(MathsLibraryPointer.Value)
 
 const NM_TO_M = 1E-9 -- Nanometer to meter conversion factor | m nm^-1
 
-module.VISIBLE_MIN = 380 -- Start of visible spectrum (380 nm) | nm
-module.VISIBLE_MAX = 780 -- End of visible spectrum (780 nm) | nm
+BlackbodyPhysicsLibrary.VISIBLE_MIN = 380 -- Start of visible spectrum (380 nm) | nm
+BlackbodyPhysicsLibrary.VISIBLE_MAX = 780 -- End of visible spectrum (780 nm) | nm
 
 const PLANCK_CONSTANT = 6.6261E-34 -- Planck's constant | J s
 const SPEED_OF_LIGHT = 299792458 -- Speed of light in a vacuum | m s^-1
@@ -91,7 +92,7 @@ const BOLTZMANN_CONSTANT = 1.3806E-23 -- Boltzmann's constant | J K^-1
 -- ---
 -- Returns:
 -- * [1] (number): The spectral radiance of the blackbody at the given wavelength and temperature. | J s^-1 m^-2 sr^-1 nm^-1
-function module.SpectralRadiance(wavelength: number, temperature: number)
+function BlackbodyPhysicsLibrary.SpectralRadiance(wavelength: number, temperature: number)
 	
 	assert(wavelength > 0, "Wavelength must be greater than 0")
 
@@ -121,7 +122,7 @@ end
 -- ---
 -- Returns:
 -- * [1] (number): The relative large cone stimulus value for the given wavelength of light.
-function module.XStimulus(wavelength: number)
+function BlackbodyPhysicsLibrary.XStimulus(wavelength: number)
 
 	assert(wavelength > 0, "Wavelength must be greater than 0")
 
@@ -144,7 +145,7 @@ end
 -- ---
 -- Returns:
 -- * [1] (number): The relative medium cone stimulus value for the given wavelength of light.
-function module.YStimulus(wavelength: number)
+function BlackbodyPhysicsLibrary.YStimulus(wavelength: number)
 
 	assert(wavelength > 0, "Wavelength must be greater than 0")
 
@@ -165,7 +166,7 @@ end
 -- ---
 -- Returns:
 -- * [1] (number): The relative small cone stimulus value for the given wavelength of light.
-function module.ZStimulus(wavelength: number)
+function BlackbodyPhysicsLibrary.ZStimulus(wavelength: number)
 
 	assert(wavelength > 0, "Wavelength must be greater than 0")
 
@@ -189,14 +190,14 @@ end
 -- * [1] (number): The relative large cone stimulus value for the given wavelength of light.
 -- * [2] (number): The relative medium cone stimulus value for the given wavelength of light.
 -- * [3] (number): The relative small cone stimulus value for the given wavelength of light.
-function module.Tristimulus(wavelength: number)
+function BlackbodyPhysicsLibrary.Tristimulus(wavelength: number)
 
 	assert(wavelength > 0, "Wavelength must be greater than 0")
 
 	return
-		module.XStimulus(wavelength),
-		module.YStimulus(wavelength),
-		module.ZStimulus(wavelength)
+		BlackbodyPhysicsLibrary.XStimulus(wavelength),
+		BlackbodyPhysicsLibrary.YStimulus(wavelength),
+		BlackbodyPhysicsLibrary.ZStimulus(wavelength)
 
 end
 
@@ -225,7 +226,7 @@ end
 -- ---
 -- Returns:
 -- * [1] (number): The power emitted by the blackbody at the given temperature, angle, and area. | J s^-1
-function module.BlackbodyPower(
+function BlackbodyPhysicsLibrary.BlackbodyPower(
 	temperature: number,
 	angle: number?,
 	area: number?,
@@ -237,8 +238,8 @@ function module.BlackbodyPower(
 )
 	
 	local step: number = gammaStep or 1
-	local minimum: number = minimumWavelength or module.VISIBLE_MIN
-	local maximum: number = maximumWavelength or module.VISIBLE_MAX
+	local minimum: number = minimumWavelength or BlackbodyPhysicsLibrary.VISIBLE_MIN
+	local maximum: number = maximumWavelength or BlackbodyPhysicsLibrary.VISIBLE_MAX
 	
 	local power = 0
 	
@@ -246,7 +247,7 @@ function module.BlackbodyPower(
 
 		local wavelengthMeters = wavelength * NM_TO_M
 
-		local radiance = module.SpectralRadiance(wavelengthMeters, temperature)
+		local radiance = BlackbodyPhysicsLibrary.SpectralRadiance(wavelengthMeters, temperature)
 
 		power += step * radiance * angle * area
 
@@ -260,4 +261,4 @@ end
 
 -- Termination
 
-return module
+return BlackbodyPhysicsLibrary

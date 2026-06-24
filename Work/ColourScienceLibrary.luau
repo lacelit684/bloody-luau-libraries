@@ -1,14 +1,15 @@
 --[[
 
 	ColourScienceLibrary.luau
+	Utility Library
 	
 	Authors:
 	* Irene "lacelit684" - Lead Developer since 2026-06-22
 	
 	Created: 2026-06-22
-	Last Modified: 2026-06-23
+	Last Modified: 2026-06-24
 	
-	Version: 2.0.0
+	Version: 2.0.1
 	
 	License: MPL-2.0
 	
@@ -28,9 +29,9 @@
 -- This declaration can be removed to free up a small amount of the native code budget at the cost of poor performance. You ought to leave this in unless you already have a large amount of native code in your project.
 --!native
 
-local module = {}
+local ColourScienceLibrary = {}
 
-module.Citations = {
+ColourScienceLibrary.Citations = {
 	[1] = "Viggiano, J.A.S., Salvaggio, N. and Sampat, N. (n.d.). Chromaticity Matrix to Tristimulus Matrix Conversion for RGB Color Spaces -Even In the Dark. [online] Rochester Institute of Technology, p.2. Available at: https://s3.cad.rit.edu/cadgallery_production/storage/media/uploads/projects/1441/documents/390/chromaticitymatrixtotristimulusmatrixconversionfor.pdf [Accessed 26 Jun. 2025].",
 	[2] = "TrueGeometry (2025). Gamma Curve Analysis. [online] True Geometry’s Blog. Available at: https://blog.truegeometry.com/calculators/Explain_the_piecewise_nature_of_the_sRGB_gamma_curve_and_why_it_was_implemented_calculation.html [Accessed 26 Jun. 2025]."
 }
@@ -44,12 +45,12 @@ module.Citations = {
 -- ---
 -- Returns:
 -- * [1] (string | table): The citation at the given index if index is present, or a table of all citations if index is absent.
-function module.GetCitations(index: number?)
+function ColourScienceLibrary:GetCitations(index: number?)
 
 	if index then
-		return module.Citations[index]
+		return ColourScienceLibrary.Citations[index]
 	else
-		return module.Citations
+		return ColourScienceLibrary.Citations
 	end
 
 end
@@ -58,8 +59,8 @@ end
 
 -- Constants
 
-module.VISIBLE_MIN = 380 -- Start of visible spectrum (380 nm) | nm
-module.VISIBLE_MAX = 780 -- End of visible spectrum (780 nm) | nm
+ColourScienceLibrary.VISIBLE_MIN = 380 -- Start of visible spectrum (380 nm) | nm
+ColourScienceLibrary.VISIBLE_MAX = 780 -- End of visible spectrum (780 nm) | nm
 
 
 
@@ -73,7 +74,7 @@ module.VISIBLE_MAX = 780 -- End of visible spectrum (780 nm) | nm
 -- ---
 -- Returns:
 -- * [1] (number): The relative large cone stimulus value for the given wavelength of light.
-function module.XStimulus(wavelength: number)
+function ColourScienceLibrary.XStimulus(wavelength: number)
 
 	assert(wavelength > 0, "Wavelength must be greater than 0")
 
@@ -96,7 +97,7 @@ end
 -- ---
 -- Returns:
 -- * [1] (number): The relative medium cone stimulus value for the given wavelength of light.
-function module.YStimulus(wavelength: number)
+function ColourScienceLibrary.YStimulus(wavelength: number)
 
 	assert(wavelength > 0, "Wavelength must be greater than 0")
 
@@ -117,7 +118,7 @@ end
 -- ---
 -- Returns:
 -- * [1] (number): The relative small cone stimulus value for the given wavelength of light.
-function module.ZStimulus(wavelength: number)
+function ColourScienceLibrary.ZStimulus(wavelength: number)
 
 	assert(wavelength > 0, "Wavelength must be greater than 0")
 
@@ -140,14 +141,14 @@ end
 -- * [1] (number): The relative large cone stimulus value for the given wavelength of light.
 -- * [2] (number): The relative medium cone stimulus value for the given wavelength of light.
 -- * [3] (number): The relative small cone stimulus value for the given wavelength of light.
-function module.Tristimulus(wavelength: number)
+function ColourScienceLibrary.Tristimulus(wavelength: number)
 
 	assert(wavelength > 0, "Wavelength must be greater than 0")
 
 	return
-		module.XStimulus(wavelength),
-		module.YStimulus(wavelength),
-		module.ZStimulus(wavelength)
+		ColourScienceLibrary.XStimulus(wavelength),
+		ColourScienceLibrary.YStimulus(wavelength),
+		ColourScienceLibrary.ZStimulus(wavelength)
 
 end
 
@@ -166,7 +167,7 @@ end
 -- * [1] (number): The red linear RGB value.
 -- * [2] (number): The green linear RGB value.
 -- * [3] (number): The blue linear RGB value.
-function module.XYZToLRGB(x: number, y: number, z: number)
+function ColourScienceLibrary.XYZToLRGB(x: number, y: number, z: number)
 
 	local red   =  3.2404542 * x - 1.5371385 * y - 0.4985314 * z
 	local green = -0.9692660 * x + 1.8760108 * y + 0.0415560 * z
@@ -187,7 +188,7 @@ end
 -- ---
 -- Returns:
 -- * [1] (number): The gamma-corrected sRGB value.
-function module.GammaCorrection(value: number, accurate: boolean?)
+function ColourScienceLibrary.GammaCorrection(value: number, accurate: boolean?)
 
 	accurate = not not accurate
 
@@ -220,7 +221,7 @@ end
 -- * [1] (number): The gamma-corrected sRGB red value.
 -- * [2] (number): The gamma-corrected sRGB green value.
 -- * [3] (number): The gamma-corrected sRGB blue value.
-function module.LRGBToDisplay(
+function ColourScienceLibrary.LRGBToDisplay(
 	red: number,
 	green: number,
 	blue: number,
@@ -229,9 +230,9 @@ function module.LRGBToDisplay(
 )
 
 	return
-		math.clamp(module.GammaCorrection( red, accurate ), 0, 1),
-		math.clamp(module.GammaCorrection( green, accurate ), 0, 1),
-		math.clamp(module.GammaCorrection( blue, accurate ), 0, 1)
+		math.clamp(ColourScienceLibrary.GammaCorrection( red, accurate ), 0, 1),
+		math.clamp(ColourScienceLibrary.GammaCorrection( green, accurate ), 0, 1),
+		math.clamp(ColourScienceLibrary.GammaCorrection( blue, accurate ), 0, 1)
 
 end
 
@@ -243,4 +244,4 @@ end
 
 -- Termination
 
-return module
+return ColourScienceLibrary

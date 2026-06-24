@@ -1,8 +1,9 @@
 --[[
 
-	LibraryCleanTemplate.luau
+	LibraryTemplate.luau
+	Utility Library
 	
-	Authors:
+	Contributors:
 	* YOUR NAME - YOUR ROLE since YYYY-MM-DD
 	
 	Created: YYYY-MM-DD
@@ -16,7 +17,10 @@
 	REPLACE
 	
 	Citations:
-	[1] AS SUCH
+	[1] AS NEEDED
+
+	Dependencies:
+	AS NEEDED
 	
 ]]
 
@@ -24,10 +28,10 @@
 
 -- Preamble
 
-local module = {}
+local Library = {}
 
-module.Citations = {
-	[1] = "AS SUCH"
+Library.Citations = {
+	[1] = "AS NEEDED"
 }
 
 -- Fetches built-in citations.
@@ -39,12 +43,12 @@ module.Citations = {
 -- ---
 -- Returns:
 -- * [1] (string | table): The citation at the given index if index is present, or a table of all citations if index is absent.
-function module.GetCitations(index: number?)
+function Library:GetCitations(index: number?)
 
 	if index then
-		return module.Citations[index]
+		return Library.Citations[index]
 	else
-		return module.Citations
+		return Library.Citations
 	end
 
 end
@@ -65,4 +69,4 @@ end
 
 -- Termination
 
-return module
+return Library

@@ -1,6 +1,7 @@
 --[[
 
-	ExemplaryLibraryTemplate.luau
+	ExemplaryLibrary.luau
+	Utility Library
 	Name your library whatever and use the correct file format.
 	
 	Contributors:
@@ -8,10 +9,10 @@
 	State role, add and remove as needed.
 	
 	Created: 2026-06-21
-	Last Modified: 2026-06-21
+	Last Modified: 2026-06-24
 	Keep these up to date or your records will suffer your incompetence.
 	
-	Version: 0.0.0
+	Version: 0.0.1
 	Increment the first one when you make a backwards incompatible change to the module.
 	Increment the second one when you add backwards compatible functionality.
 	Increment the third one when you fix bugs.
@@ -19,8 +20,8 @@
 	License: MPL-2.0
 	
 	Description:
-	Describe the module here.
-	Exemplary module showcasing and interactively documenting Irene's programming conventions.
+	Describe the library here.
+	Exemplary library showcasing and interactively documenting Irene's programming conventions for utility libraries.
 	
 	Citations:
 	[1] Use Harvard citations to cite your sources for whatever magic data.
@@ -30,7 +31,6 @@
 	
 	You can also write extra things in this section, like a changelog, acknowledgements or a memorial.
 	I used this to pay my respects to the fathers of the field of physics in my previous libraries.
-	Maybe add a note to put the module in ReplicatedStorage.
 	
 ]]
 
@@ -45,9 +45,9 @@
 
 -- This is where module imports, citations and declarations go.
 
-local module = {}
+local ExemplaryLibrary = {} -- Feel free to rename the returned module.
 
-module.Citations = { -- TODO: Maybe I should make a universal citation module?
+ExemplaryLibrary.Citations = { -- TODO: Maybe I should make a universal citation module?
 	[1] = "Use Harvard citations to cite your sources for whatever magic data."
 }
 
@@ -60,15 +60,21 @@ module.Citations = { -- TODO: Maybe I should make a universal citation module?
 -- ---
 -- Returns:
 -- * [1] (string | table): The citation at the given index if index is present, or a table of all citations if index is absent.
-function module.GetCitations(index: number?)
+function ExemplaryLibrary:GetCitations(index: number?)
 
 	if index then
-		return module.Citations[index]
+		return ExemplaryLibrary.Citations[index]
 	else
-		return module.Citations
+		return ExemplaryLibrary.Citations
 	end
 
 end
+
+-- Types
+
+-- This is where types go.
+
+type AlphaBravo = ("A" | "B")
 
 
 
@@ -83,8 +89,8 @@ const NM_TO_M = 1E-9 -- Nanometer to meter conversion factor | m nm^-1
 
 -- These are public constants exposed by the module table.
 
-module.VISIBLE_MIN = 380 -- Start of visible spectrum (380 nm) | nm
-module.VISIBLE_MAX = 780 -- End of visible spectrum (780 nm) | nm
+ExemplaryLibrary.VISIBLE_MIN = 380 -- Start of visible spectrum (380 nm) | nm
+ExemplaryLibrary.VISIBLE_MAX = 780 -- End of visible spectrum (780 nm) | nm
 
 const PLANCK_CONSTANT = 6.6261E-34 -- Planck's constant | J s
 const SPEED_OF_LIGHT = 299792458 -- Speed of light in a vacuum | m s^-1
@@ -92,11 +98,13 @@ const BOLTZMANN_CONSTANT = 1.3806E-23 -- Boltzmann's constant | J K^-1
 
 const IRENE_HAS_GIRLFRIEND = false -- Whether Irene has a girlfriend (false) (this is so sad chat)
 
+local bravo: AlphaBravo = "B" -- B for Bravo
+
 
 
 -- Functions
 
--- This is where functions go,
+-- This is where functions that just calculate and return something go.
 
 -- Calculates the distance travelled by a particle at constant velocity.
 -- ---
@@ -108,7 +116,7 @@ const IRENE_HAS_GIRLFRIEND = false -- Whether Irene has a girlfriend (false) (th
 -- ---
 -- Returns:
 -- * [1] (number): The distance travelled by the particle. | m
-function module.DistanceTravelled(speed: number, timeTravelled: number)
+function ExemplaryLibrary.DistanceTravelled(speed: number, timeTravelled: number)
 	return speed * timeTravelled
 end
 
@@ -123,7 +131,7 @@ end
 -- ---
 -- Returns:
 -- * [1] (number): The speed of the particle. | m s^-1
-function module.SpeedCalculation(distanceTravelled: number, timeTravelled: number)
+function ExemplaryLibrary.SpeedCalculation(distanceTravelled: number, timeTravelled: number)
 
 	assert(timeTravelled ~= 0, "Time travelled must not be zero")
 	return distanceTravelled / timeTravelled
@@ -145,7 +153,7 @@ end
 -- ---
 -- Returns:
 -- * [1] (number): The result of the integration.
-function module.NumericallyIntegrateCrap(
+function ExemplaryLibrary.NumericallyIntegrateCrap(
 	functionToIntegrate: (number) -> number,
 	
 	domainMin: number,
@@ -189,7 +197,7 @@ end
 -- Returns:
 -- * [1] (boolean): The success state of the function body.
 -- * [2] (unknown): The error message if the function fails.
-function module.PrintTree(height: number)
+function ExemplaryLibrary.PrintTree(height: number)
 
 	local success, err = pcall(function()
 
@@ -215,4 +223,4 @@ end
 
 -- Termination
 
-return module
+return ExemplaryLibrary
