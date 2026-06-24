@@ -15,9 +15,6 @@
 	
 	Description:
 	REPLACE
-	
-	Citations:
-	[1] AS NEEDED
 
 	Dependencies:
 	AS NEEDED
@@ -30,29 +27,6 @@
 
 local Class = {}
 Class.__index = Class
-
-Class.Citations = {
-	[1] = "AS SUCH"
-}
-
--- Fetches built-in citations.
--- ---
--- Inputs:
--- * index (number) (optional): The index of the citation to print.
--- ... [MUST] be an integer.
--- ... [MUST] be 1 or greater.
--- ---
--- Returns:
--- * [1] (string | table): The citation at the given index if index is present, or a table of all citations if index is absent.
-function Class:GetCitations(index: number?)
-
-	if index then
-		return Class.Citations[index]
-	else
-		return Class.Citations
-	end
-
-end
 
 
 
@@ -70,7 +44,11 @@ export type Class = typeof(setmetatable({} :: ClassData, Class))
 
 
 
--- Functions
+-- Variables
+
+
+
+-- Constructors
 
 function Class.new()
 
@@ -82,7 +60,16 @@ end
 
 
 
+
+-- Functions
+
+
+
 -- Procedures
+
+
+
+-- Lifecycle
 
 
 

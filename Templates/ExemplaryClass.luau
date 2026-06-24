@@ -22,9 +22,6 @@
 	Description:
 	Describe the class here.
 	Exemplary class showcasing and interactively documenting Irene's programming conventions for class definitions.
-	
-	Citations:
-	[1] Use Harvard citations to cite your sources for whatever magic data.
 
 	Dependencies:
 	They go here.
@@ -40,29 +37,6 @@
 
 local Class = {}
 Class.__index = Class
-
-Class.Citations = {
-	[1] = "Use Harvard citations to cite your sources for whatever magic data."
-}
-
--- Fetches built-in citations.
--- ---
--- Inputs:
--- * index (number) (optional): The index of the citation to print.
--- ... [MUST] be an integer.
--- ... [MUST] be 1 or greater.
--- ---
--- Returns:
--- * [1] (string | table): The citation at the given index if index is present, or a table of all citations if index is absent.
-function Class:GetCitations(index: number?)
-
-	if index then
-		return Class.Citations[index]
-	else
-		return Class.Citations
-	end
-
-end
 
 
 
@@ -85,7 +59,11 @@ export type Class = typeof(setmetatable({} :: ClassData, Class))
 
 
 
--- Functions
+-- Variables
+
+
+
+-- Constructors
 
 -- Generates a new instance of Class.
 -- ---
@@ -106,6 +84,10 @@ function Class.new(alpha: number, bravo: string, charlie: Chicken?)
 	return setmetatable(self, Class)
 
 end
+
+
+
+-- Functions
 
 
 -- Returns the repetition of this Class's Alpha by this Class's Bravo multiplied by a factor.

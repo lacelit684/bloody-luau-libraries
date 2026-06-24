@@ -1,33 +1,3 @@
---[[
-
-	LibraryTemplate.luau
-	Utility Library
-	
-	Contributors:
-	* YOUR NAME - YOUR ROLE since YYYY-MM-DD
-	
-	Created: YYYY-MM-DD
-	Last Modified: YYYY-MM-DD
-	
-	Version: 1.2.3
-	
-	Licence: LICENCE
-	
-	Description:
-	REPLACE
-	
-	Citations:
-	[1] AS NEEDED
-
-	Dependencies:
-	AS NEEDED
-	
-]]
-
-
-
--- Preamble
-
 local Library = {}
 
 Library.Citations = {
@@ -52,29 +22,3 @@ function Library:GetCitations(index: number?)
 	end
 
 end
-
-
-
--- Types
-
-
-
--- Constants
-
-
-
--- Variables
-
-
-
--- Functions
-
-
-
--- Procedures
-
-
-
--- Termination
-
-return Library

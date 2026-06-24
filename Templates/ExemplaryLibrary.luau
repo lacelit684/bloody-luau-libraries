@@ -100,6 +100,12 @@ const BOLTZMANN_CONSTANT = 1.3806E-23 -- Boltzmann's constant | J K^-1
 
 const IRENE_HAS_GIRLFRIEND = false -- Whether Irene has a girlfriend (false) (this is so sad chat)
 
+const alpha: AlphaBravo = "A" -- A for Alpha
+
+
+
+-- Variables
+
 local bravo: AlphaBravo = "B" -- B for Bravo
 
 
