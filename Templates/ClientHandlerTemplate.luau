@@ -1,7 +1,7 @@
 --[[
 
-	ControllerTemplate.luau
-	Runtime Controller
+	ClientHandlerTemplate.luau
+	Client Handler
 	
 	Contributors:
 	* YOUR NAME - YOUR ROLE since YYYY-MM-DD
@@ -15,9 +15,6 @@
 	
 	Description:
 	REPLACE
-	
-	Citations:
-	[1] AS NEEDED
 
 	Dependencies:
 	AS NEEDED
@@ -28,7 +25,9 @@
 
 -- Preamble
 
-local Controller = {}
+local Controllers = {
+
+}
 
 
 
@@ -44,26 +43,22 @@ local Controller = {}
 
 
 
--- Functions
-
-
-
--- Procedures
-
-
-
 -- Lifecycle
 
-function Controller:Init()
-
+for _, controller in Controllers do
+	if controller.Init then
+		controller:Init()
+	end
 end
 
-function Controller:Start()
-
+for _, controller in Controllers do
+	if controller.Start then
+		coroutine.wrap(function()
+			controller:Start()
+		end)()
+	end
 end
 
 
 
 -- Termination
-
-return Controller

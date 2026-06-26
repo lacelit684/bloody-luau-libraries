@@ -1,7 +1,7 @@
 --[[
 
-	ControllerTemplate.luau
-	Runtime Controller
+	ServerHandlerTemplate.luau
+	Server Handler
 	
 	Contributors:
 	* YOUR NAME - YOUR ROLE since YYYY-MM-DD
@@ -15,9 +15,6 @@
 	
 	Description:
 	REPLACE
-	
-	Citations:
-	[1] AS NEEDED
 
 	Dependencies:
 	AS NEEDED
@@ -28,7 +25,9 @@
 
 -- Preamble
 
-local Controller = {}
+local Services = {
+
+}
 
 
 
@@ -44,26 +43,22 @@ local Controller = {}
 
 
 
--- Functions
-
-
-
--- Procedures
-
-
-
 -- Lifecycle
 
-function Controller:Init()
-
+for _, service in Services do
+	if service.Init then
+		service:Init()
+	end
 end
 
-function Controller:Start()
-
+for _, service in Services do
+	if service.Start then
+		coroutine.wrap(function()
+			service:Start()
+		end)()
+	end
 end
 
 
 
 -- Termination
-
-return Controller
