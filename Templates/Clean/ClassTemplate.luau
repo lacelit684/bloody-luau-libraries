@@ -36,7 +36,7 @@ type ClassData = {
 
 }
 
-export type Class = typeof(setmetatable({} :: ClassData, Class))
+export type ClassInstance = setmetatable<ClassData, typeof(Class)>
 
 
 
