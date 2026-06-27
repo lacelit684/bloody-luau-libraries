@@ -50,14 +50,14 @@ local Players = game:GetService("Players")
 -- This is where types go.
 
 -- Constants
--- Add shared constants here.
+-- This is where constant values go.
 
 INITIAL_APPLES = 123
 
 
 
 -- Variables
--- Add shared state, caches, or Roblox Instance references here.
+-- This is where shared mutable state goes.
 
 apples = 0
 ExemplaryService.bananas = 456
@@ -65,8 +65,15 @@ ExemplaryService.bananas = 456
 
 
 -- Functions
--- Add helper methods that compute or return values here.
+-- This is where functions that calculate and return a value go.
 
+-- Returns the amount of apples.
+-- ---
+-- Inputs:
+-- * (none)
+-- ---
+-- Returns:
+-- [1] (number): The amount of apples.
 function ExemplaryService:GetApples(): number
 	return apples
 end
@@ -74,23 +81,59 @@ end
 
 
 -- Procedures
+-- This is where functions designed to do something outside of computing and returning a value go.
 
-function ExemplaryService:IncrementApples()
+-- Increments the count of apples by the specified amount.
+-- ---
+-- Inputs:
+-- * amount (number): The amount which the apple count should be increased by.
+-- ---
+-- Actions:
+-- Increments apples by amount.
+-- ---
+-- Returns:
+-- * (none)
+function ExemplaryService:IncrementApples(amount: number)
+
+	assert(amount % 1 == 0, "Amount must be integer")
+	assert(amount >= 1, "Amount must be 1 or greater")
+
 	apples += 1
+
 end
 
 
 
 -- Lifecycle
 
-function ExemplaryService:Init() -- Sets up the state of the service.
+-- Sets up the service.
+-- ---
+-- Inputs:
+-- * (none)
+-- ---
+-- Actions:
+-- Sets up the service's passive elements.
+-- ---
+-- Returns:
+-- * (none)
+function ExemplaryService:Init()
 	
 	apples = INITIAL_APPLES
 	print("ExemplaryService initialised.")
 
 end
 
-function ExemplaryService:Start() -- Begins the active operation of the service.
+-- Begins the active operation of the service.
+-- ---
+-- Inputs:
+-- * (none)
+-- ---
+-- Actions:
+-- Starts the service's active elements.
+-- ---
+-- Returns:
+-- * (none)
+function ExemplaryService:Start()
 
 	Players.PlayerAdded:Connect(function(player: Player)
 		apples += player.UserId
@@ -99,6 +142,8 @@ function ExemplaryService:Start() -- Begins the active operation of the service.
 	print("ExemplaryService started.")
 
 end
+
+-- TODO: ADD MORE EXAMPLE CODE
 
 
 

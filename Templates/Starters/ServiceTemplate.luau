@@ -48,6 +48,7 @@ local Service = {}
 -- This is where functions designed to do something outside of computing and returning a value go.
 
 -- Lifecycle
+-- This is what the service should do nearly autonomously.
 
 function Service:Init()
 

@@ -48,18 +48,41 @@ local Controller = {}
 -- This is where functions designed to do something outside of computing and returning a value go.
 
 -- Lifecycle
+-- This is what the controller should do nearly autonomously.
 
-function ExemplaryService:Init() -- Sets up the state of the controller.
+-- Sets up the controller.
+-- ---
+-- Inputs:
+-- * (none)
+-- ---
+-- Actions:
+-- Sets up the controller's passive elements.
+-- ---
+-- Returns:
+-- * (none)
+function ExemplaryService:Init()
 
 	print("ExemplaryController initialised.")
 
 end
 
-function ExemplaryService:Start() -- Begins the active operation of the controller.
+-- Begins the active operation of the controller.
+-- ---
+-- Inputs:
+-- * (none)
+-- ---
+-- Actions:
+-- Starts the controller's active elements.
+-- ---
+-- Returns:
+-- * (none)
+function ExemplaryService:Start()
 
 	print("ExemplaryController started.")
 
 end
+
+-- TODO: ADD MORE EXAMPLE CODE
 
 
 
